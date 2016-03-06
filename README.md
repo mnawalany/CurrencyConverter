@@ -15,5 +15,3 @@ alternatively executable war may be created and run
     java -jar CurrencyConverter.war    
 
 you can access application on http://localhost:8080/
-
-

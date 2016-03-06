@@ -44,7 +44,6 @@ public class CurrencyController {
     @RequestMapping(value = "/main.html", method = RequestMethod.GET)
     public ModelAndView mainPage(User user) {
         ModelAndView mav = getModel(user);
-        mav.addObject("currencyExchangeForm", new CurrencyExchangeForm());
         return mav;
     }
 
@@ -61,10 +60,6 @@ public class CurrencyController {
                 new BigDecimal(currencyExchangeForm.getValue()));
         ModelAndView mav = getModel(user);
         mav.addObject("result", result);
-        CurrencyExchangeForm newExchangeForm = new CurrencyExchangeForm();
-        newExchangeForm.setSourceCurrency(currencyExchangeForm.getSourceCurrency());
-        newExchangeForm.setTargetCurrency(currencyExchangeForm.getTargetCurrency());
-        mav.addObject("currencyExchangeForm", newExchangeForm);
         return mav;
     }
     
@@ -72,7 +67,15 @@ public class CurrencyController {
         ModelAndView mav = new ModelAndView("currency/main");
         mav.addObject("username", user.getUsername());
         mav.addObject("currencies", currenciesService.getSupportedCurrencies());
-        mav.addObject("recentCurrencyQueries", currencyQueryHistoryReader.getRecentCurrencyQueries(user));
+        List<CurrencyQuery> recentCurrencyQueries = currencyQueryHistoryReader.getRecentCurrencyQueries(user);
+        mav.addObject("recentCurrencyQueries", recentCurrencyQueries);
+        CurrencyExchangeForm newExchangeForm = new CurrencyExchangeForm();
+        if (!recentCurrencyQueries.isEmpty()) {
+            CurrencyQuery latestQuery = recentCurrencyQueries.get(0);
+            newExchangeForm.setSourceCurrency(latestQuery.getSourceCurrency().getId());
+            newExchangeForm.setTargetCurrency(latestQuery.getTargetCurrency().getId());
+        }
+        mav.addObject("currencyExchangeForm", newExchangeForm);
         return mav;
     }
 

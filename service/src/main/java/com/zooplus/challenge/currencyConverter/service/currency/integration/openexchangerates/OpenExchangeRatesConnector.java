@@ -1,6 +1,7 @@
 package com.zooplus.challenge.currencyConverter.service.currency.integration.openexchangerates;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zooplus.challenge.currencyConverter.service.SpringProfile;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -8,12 +9,14 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Map;
 
 @Service
+@Profile(SpringProfile.NOT_TEST)
 class OpenExchangeRatesConnector {
 
     @Autowired

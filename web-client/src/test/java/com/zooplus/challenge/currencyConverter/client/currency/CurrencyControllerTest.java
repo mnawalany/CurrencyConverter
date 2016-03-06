@@ -22,6 +22,7 @@ import java.util.List;
 import static io.codearte.catchexception.shade.mockito.Mockito.mock;
 import static io.codearte.catchexception.shade.mockito.Mockito.verify;
 import static io.codearte.catchexception.shade.mockito.Mockito.when;
+import static java.time.LocalDateTime.now;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
@@ -41,7 +42,7 @@ public class CurrencyControllerTest {
     private CurrencyController currencyController;
 
     @Test
-    public void shouldReturnMainPage() {
+    public void shouldReturnMainPageWhenNoRecentQueries() {
         // Given
         User user = new User("id", "some username");
 
@@ -50,7 +51,6 @@ public class CurrencyControllerTest {
         given(currenciesService.getSupportedCurrencies()).willReturn(currencyList);
 
         List<CurrencyQuery> recentQueries = new LinkedList<>();
-        recentQueries.add(new CurrencyQuery(LocalDateTime.now(), null, null, null, null));
         given(currencyQueryHistoryReader.getRecentCurrencyQueries(user)).willReturn(recentQueries);
 
         // When
@@ -61,7 +61,39 @@ public class CurrencyControllerTest {
         assertThat(mav.getModel().get("username")).isEqualTo("some username");
         assertThat(mav.getModel().get("currencies")).isEqualTo(currencyList);
         assertThat(mav.getModel().get("recentCurrencyQueries")).isEqualTo(recentQueries);
-        assertThat(mav.getModel().get("currencyExchangeForm")).isNotNull();
+        CurrencyExchangeForm newExchangeForm = (CurrencyExchangeForm) mav.getModel().get("currencyExchangeForm");
+        assertThat(newExchangeForm.getSourceCurrency()).isNull();
+        assertThat(newExchangeForm.getTargetCurrency()).isNull();
+        assertThat(newExchangeForm.getValue()).isNull();
+    }
+
+    @Test
+    public void shouldReturnMainPageWhenWithRecentQueries() {
+        // Given
+        User user = new User("id", "some username");
+
+        List<Currency> currencyList = new LinkedList<>();
+        currencyList.add(new Currency("USD", "dollar"));
+        given(currenciesService.getSupportedCurrencies()).willReturn(currencyList);
+
+        List<CurrencyQuery> recentQueries = new LinkedList<>();
+        recentQueries.add(new CurrencyQuery(now(), new Currency("source", null), null, new Currency("target", null), null));
+        recentQueries.add(new CurrencyQuery(now(), null, null, null, null));
+        recentQueries.add(new CurrencyQuery(now(), null, null, null, null));
+        given(currencyQueryHistoryReader.getRecentCurrencyQueries(user)).willReturn(recentQueries);
+
+        // When
+        ModelAndView mav = currencyController.mainPage(user);
+
+        // Then
+        assertThat(mav.getViewName()).isEqualTo("currency/main");
+        assertThat(mav.getModel().get("username")).isEqualTo("some username");
+        assertThat(mav.getModel().get("currencies")).isEqualTo(currencyList);
+        assertThat(mav.getModel().get("recentCurrencyQueries")).isEqualTo(recentQueries);
+        CurrencyExchangeForm newExchangeForm = (CurrencyExchangeForm) mav.getModel().get("currencyExchangeForm");
+        assertThat(newExchangeForm.getSourceCurrency()).isEqualTo("source");
+        assertThat(newExchangeForm.getTargetCurrency()).isEqualTo("target");
+        assertThat(newExchangeForm.getValue()).isNull();
     }
 
     @Test
@@ -74,7 +106,9 @@ public class CurrencyControllerTest {
         given(currenciesService.getSupportedCurrencies()).willReturn(currencyList);
 
         List<CurrencyQuery> recentQueries = new LinkedList<>();
-        recentQueries.add(new CurrencyQuery(LocalDateTime.now(), null, null, null, null));
+        recentQueries.add(new CurrencyQuery(now(), new Currency("source", null), null, new Currency("target", null), null));
+        recentQueries.add(new CurrencyQuery(now(), null, null, null, null));
+        recentQueries.add(new CurrencyQuery(now(), null, null, null, null));
         given(currencyQueryHistoryReader.getRecentCurrencyQueries(user)).willReturn(recentQueries);
 
         CurrencyExchangeForm currencyExchangeForm = new CurrencyExchangeForm();
@@ -103,7 +137,9 @@ public class CurrencyControllerTest {
         given(currenciesService.getSupportedCurrencies()).willReturn(currencyList);
 
         List<CurrencyQuery> recentQueries = new LinkedList<>();
-        recentQueries.add(new CurrencyQuery(LocalDateTime.now(), null, null, null, null));
+        recentQueries.add(new CurrencyQuery(now(), new Currency("source", null), null, new Currency("target", null), null));
+        recentQueries.add(new CurrencyQuery(now(), null, null, null, null));
+        recentQueries.add(new CurrencyQuery(now(), null, null, null, null));
         given(currencyQueryHistoryReader.getRecentCurrencyQueries(user)).willReturn(recentQueries);
 
         CurrencyExchangeForm currencyExchangeForm = new CurrencyExchangeForm();
@@ -114,7 +150,7 @@ public class CurrencyControllerTest {
         BindingResult errors = mock(BindingResult.class);
         when(errors.hasErrors()).thenReturn(false);
 
-        CurrencyQuery result = new CurrencyQuery(LocalDateTime.now(), null, null, null, null);
+        CurrencyQuery result = new CurrencyQuery(now(), null, null, null, null);
         given(currencyExchangeCalculator.calculateExchange(user, "source", "target", new BigDecimal(123))).willReturn(result);
 
         // When
