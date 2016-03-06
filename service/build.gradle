@@ -1,0 +1,28 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$project.ext.springBootVersion")
+    }
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+    compile("org.springframework:spring-context-support")
+
+    compile("org.apache.httpcomponents:httpclient:4.5.2")
+    compile("org.apache.commons:commons-lang3:3.4")
+    compile("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.4.0")
+    compile("com.github.fakemongo:fongo:1.6.2")
+    compile("net.sf.ehcache:ehcache:2.9.1")
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("junit:junit:4.12")
+    testCompile("org.assertj:assertj-core:3.1.0")
+    testCompile("org.mockito:mockito-all:1.10.19")
+    testCompile("eu.codearte.catch-exception:catch-exception:1.4.4")
+}
+
+jar {
+    baseName = 'CurrencyConverter-service'
+    version =  '0.0.1'
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <object th:include="common :: head" th:remove="tag" />
+
+    <title>CurrencyConverter</title>
+
+</head>
+<body>
+
+<div class="container-fluid content-wrapper">
+    <div class="row"><div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+        <div class="panel panel-default"><div class="panel-body">
+            <span th:text="${username}"></span>
+            |
+            <a th:href="@{/user/logout.html}" class="btn btn-link">Log out</a>
+        </div></div>
+    </div></div>
+
+    <div class="row" th:if="${result}"><div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+        <div class="panel panel-default"><div class="panel-body">
+            <span th:text="${result.sourceValue}"></span>
+            <span th:text="${result.sourceCurrency.id}"></span>
+            =
+            <span th:text="${result.targetValue}"></span>
+            <span th:text="${result.targetCurrency.id}"></span>
+        </div></div>
+    </div></div>
+
+    <div class="row"><div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+        <div class="panel panel-default"><div class="panel-body">
+            <form method="post" th:object="${currencyExchangeForm}" class="form-horizontal panel-body">
+
+                <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+                    <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <input type="text" th:field="*{value}" name="value" id="value-field" class="form-control" />
+                    </div>
+                    <div class="col-sm-8">
+                        <select th:field="*{sourceCurrency}" class="form-control">
+                            <option th:each="currency : ${currencies}"
+                                    th:value="${currency.id}"
+                                    th:text="${currency.id} + ' - '+ ${currency.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-4 form-control-static">
+                        TO
+                    </div>
+                    <div class="col-sm-8">
+                        <select th:field="*{targetCurrency}" class="form-control">
+                            <option th:each="currency : ${currencies}"
+                                    th:value="${currency.id}"
+                                    th:text="${currency.id} + ' - '+ ${currency.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-5 col-sm-offset-7 text-right">
+                        <button type="submit" class="btn btn-primary">Calculate exchange</button>
+                    </div>
+                </div>
+
+            </form>
+        </div></div>
+    </div></div>
+
+    <div class="row" th:if="${#lists.isEmpty(recentCurrencyQueries)}"><div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+        <div class="panel panel-default"><div class="panel-body">
+            No queries history
+        </div></div>
+    </div></div>
+
+    <div class="row" th:if="${not #lists.isEmpty(recentCurrencyQueries)}"><div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+        <div class="panel panel-default">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th colspan="2">From</th>
+                        <th colspan="2">Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="query : ${recentCurrencyQueries}">
+                        <td th:text="${#temporals.format(query.date)}"></td>
+                        <td th:text="${query.sourceValue}"></td>
+                        <td th:text="${query.sourceCurrency.id}"></td>
+                        <td th:text="${query.targetValue}"></td>
+                        <td th:text="${query.targetCurrency.id}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div></div>
+
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <object th:include="common :: head" th:remove="tag" />
+
+    <title>login :: CurrencyConverter</title>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#username-field").focus();
+        });
+    </script>
+</head>
+<body>
+
+<div class="container-fluid content-wrapper">
+    <div class="row"><div class="col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0">
+
+        <div th:if="${param.error}" class="panel panel-danger">
+            <div class="panel-heading">Invalid username and password.</div>
+        </div>
+
+        <div th:if="${param.logout}" class="panel panel-success">
+            <div class="panel-heading">You have been logged out.</div>
+        </div>
+
+        <div class="panel panel-default">
+            <form th:action="@{/user/login.html}" method="post" class="form-horizontal panel-body">
+                <div class="form-group">
+                    <label for="username-field" class="control-label col-sm-4">E-mail:</label>
+                    <div class="col-sm-8">
+                        <input type="text" name="username" id="username-field" class="form-control"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password-field" class="control-label col-sm-4">Password:</label>
+                    <div class="col-sm-8">
+                        <input type="password" name="password" id="password-field" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-offset-0 col-xs-5 col-sm-offset-4 col-sm-3">
+                        <a th:href="@{/user/registration.html}" class="btn btn-link">Register</a>
+                    </div>
+                    <div class="col-sm-5 col-xs-7 text-right">
+                        <button type="submit" class="btn btn-primary">Log in</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </div></div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+
+    <cache name="OpenExchangeRates-currencies"
+           maxEntriesLocalHeap="1000"
+           maxEntriesLocalDisk="100"
+           eternal="false"
+           diskSpoolBufferSizeMB="1"
+           timeToIdleSeconds="3000" timeToLiveSeconds="6000"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap" />
+    </cache>
+
+    <cache name="OpenExchangeRates-exchangeRates"
+           maxEntriesLocalHeap="1000"
+           maxEntriesLocalDisk="100"
+           eternal="false"
+           diskSpoolBufferSizeMB="1"
+           timeToIdleSeconds="300" timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap" />
+    </cache>
+
+</ehcache>
