@@ -5,7 +5,6 @@ import com.zooplus.challenge.currencyConverter.service.config.ServiceConfigurati
 import com.zooplus.challenge.currencyConverter.service.currency.Currency;
 import com.zooplus.challenge.currencyConverter.service.currency.CurrencyQuery;
 import com.zooplus.challenge.currencyConverter.service.user.User;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

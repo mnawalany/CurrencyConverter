@@ -3,9 +3,7 @@ package com.zooplus.challenge.currencyConverter.client.currency;
 import org.junit.Test;
 import org.springframework.validation.Errors;
 
-import static io.codearte.catchexception.shade.mockito.Mockito.mock;
-import static io.codearte.catchexception.shade.mockito.Mockito.verify;
-import static io.codearte.catchexception.shade.mockito.Mockito.verifyNoMoreInteractions;
+import static io.codearte.catchexception.shade.mockito.Mockito.*;
 
 public class CurrencyExchangeFormValidatorTest {
 

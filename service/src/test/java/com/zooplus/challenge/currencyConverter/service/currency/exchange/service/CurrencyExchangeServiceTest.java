@@ -7,14 +7,11 @@ import com.zooplus.challenge.currencyConverter.service.currency.currencies.Curre
 import com.zooplus.challenge.currencyConverter.service.currency.history.CurrencyQueryHistoryWriter;
 import com.zooplus.challenge.currencyConverter.service.currency.integration.RemoteCurrencyService;
 import com.zooplus.challenge.currencyConverter.service.user.User;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

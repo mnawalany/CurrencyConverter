@@ -2,10 +2,8 @@ package com.zooplus.challenge.currencyConverter.service.user.service;
 
 import com.zooplus.challenge.currencyConverter.service.IdGenerator;
 import com.zooplus.challenge.currencyConverter.service.user.User;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;

@@ -1,6 +1,5 @@
 package com.zooplus.challenge.currencyConverter.client.currency;
 
-import com.zooplus.challenge.currencyConverter.service.currency.Currency;
 import com.zooplus.challenge.currencyConverter.service.currency.CurrencyQuery;
 import com.zooplus.challenge.currencyConverter.service.currency.currencies.CurrenciesService;
 import com.zooplus.challenge.currencyConverter.service.currency.exchange.CurrencyExchangeCalculator;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/currency/")

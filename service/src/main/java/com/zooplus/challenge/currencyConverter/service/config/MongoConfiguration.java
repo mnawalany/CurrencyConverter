@@ -2,13 +2,10 @@ package com.zooplus.challenge.currencyConverter.service.config;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
-import com.zooplus.challenge.currencyConverter.service.SpringProfile;
 import com.zooplus.challenge.currencyConverter.service.config.mongoConverters.DateToLocalDateConverter;
 import com.zooplus.challenge.currencyConverter.service.config.mongoConverters.DateToLocalDateTimeConverter;
 import com.zooplus.challenge.currencyConverter.service.config.mongoConverters.LocalDateTimeToDateConverter;
 import com.zooplus.challenge.currencyConverter.service.config.mongoConverters.LocalDateToDateConverter;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;

@@ -3,15 +3,12 @@ package com.zooplus.challenge.currencyConverter.client.user;
 import com.zooplus.challenge.currencyConverter.service.user.UserCreator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.validation.Errors;
 
-import static io.codearte.catchexception.shade.mockito.Mockito.mock;
-import static io.codearte.catchexception.shade.mockito.Mockito.verify;
-import static io.codearte.catchexception.shade.mockito.Mockito.verifyNoMoreInteractions;
+import static io.codearte.catchexception.shade.mockito.Mockito.*;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)

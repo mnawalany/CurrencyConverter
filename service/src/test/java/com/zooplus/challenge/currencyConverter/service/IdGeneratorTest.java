@@ -1,6 +1,5 @@
 package com.zooplus.challenge.currencyConverter.service;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.util.HashSet;

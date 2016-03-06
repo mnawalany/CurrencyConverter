@@ -1,14 +1,9 @@
 package com.zooplus.challenge.currencyConverter.service.currency.currencies.service;
 
-import com.googlecode.catchexception.apis.BDDCatchException;
-import com.googlecode.catchexception.apis.CatchExceptionBdd;
 import com.zooplus.challenge.currencyConverter.service.currency.Currency;
 import com.zooplus.challenge.currencyConverter.service.currency.integration.RemoteCurrencyService;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.BDDAssertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
