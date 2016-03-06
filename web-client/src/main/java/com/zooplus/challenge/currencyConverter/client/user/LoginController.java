@@ -10,7 +10,7 @@ class LoginController {
 
     @RequestMapping("/login.html")
     public ModelAndView loginPage() {
-        return new ModelAndView("/user/login");
+        return new ModelAndView("user/login");
     }
 
 }

@@ -57,7 +57,7 @@ public class CurrencyControllerTest {
         ModelAndView mav = currencyController.mainPage(user);
 
         // Then
-        assertThat(mav.getViewName()).isEqualTo("/currency/main");
+        assertThat(mav.getViewName()).isEqualTo("currency/main");
         assertThat(mav.getModel().get("username")).isEqualTo("some username");
         assertThat(mav.getModel().get("currencies")).isEqualTo(currencyList);
         assertThat(mav.getModel().get("recentCurrencyQueries")).isEqualTo(recentQueries);
@@ -86,7 +86,7 @@ public class CurrencyControllerTest {
         ModelAndView mav = currencyController.calculateExchange(user, currencyExchangeForm, errors);
 
         // Then
-        assertThat(mav.getViewName()).isEqualTo("/currency/main");
+        assertThat(mav.getViewName()).isEqualTo("currency/main");
         assertThat(mav.getModel().get("username")).isEqualTo("some username");
         assertThat(mav.getModel().get("currencies")).isEqualTo(currencyList);
         assertThat(mav.getModel().get("recentCurrencyQueries")).isEqualTo(recentQueries);
@@ -121,7 +121,7 @@ public class CurrencyControllerTest {
         ModelAndView mav = currencyController.calculateExchange(user, currencyExchangeForm, errors);
 
         // Then
-        assertThat(mav.getViewName()).isEqualTo("/currency/main");
+        assertThat(mav.getViewName()).isEqualTo("currency/main");
         assertThat(mav.getModel().get("username")).isEqualTo("some username");
         assertThat(mav.getModel().get("currencies")).isEqualTo(currencyList);
         assertThat(mav.getModel().get("recentCurrencyQueries")).isEqualTo(recentQueries);

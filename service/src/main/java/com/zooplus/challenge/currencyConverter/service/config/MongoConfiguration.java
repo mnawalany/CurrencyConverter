@@ -17,8 +17,8 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 import java.util.LinkedList;
 import java.util.List;
 
-@Configuration
-@Profile(SpringProfile.NOT_TEST)
+//@Configuration
+//@Profile(SpringProfile.NOT_TEST)
 @EnableMongoRepositories(basePackages = "com.zooplus.challenge.currencyConverter.service")
 public class MongoConfiguration extends AbstractMongoConfiguration {
 

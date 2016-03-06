@@ -69,7 +69,7 @@ public class CurrencyController {
     }
     
     private ModelAndView getModel(User user) {
-        ModelAndView mav = new ModelAndView("/currency/main");
+        ModelAndView mav = new ModelAndView("currency/main");
         mav.addObject("username", user.getUsername());
         mav.addObject("currencies", currenciesService.getSupportedCurrencies());
         mav.addObject("recentCurrencyQueries", currencyQueryHistoryReader.getRecentCurrencyQueries(user));

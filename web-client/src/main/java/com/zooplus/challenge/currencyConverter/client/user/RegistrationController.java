@@ -29,7 +29,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration.html", method = RequestMethod.GET)
     public ModelAndView registration() {
-        ModelAndView mav = new ModelAndView("/user/registration");
+        ModelAndView mav = new ModelAndView("user/registration");
         mav.addObject("registrationForm", new RegistrationForm());
         return mav;
     }
@@ -37,10 +37,10 @@ public class RegistrationController {
     @RequestMapping(value = "/registration.html", method = RequestMethod.POST)
     public String submitRegistration(@Valid RegistrationForm registrationForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/user/registration";
+            return "user/registration";
         }
         userCreator.createNewUser(registrationForm.getEmail(), registrationForm.getPassword1());
-        return "/user/registrationSuccessfull";
+        return "user/registrationSuccessfull";
     }
 
 }

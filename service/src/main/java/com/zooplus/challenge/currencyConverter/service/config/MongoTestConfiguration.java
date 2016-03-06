@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 @Configuration
-@Profile(SpringProfile.TEST)
+//@Profile(SpringProfile.TEST)
 public class MongoTestConfiguration extends MongoConfiguration {
 
     @Override
