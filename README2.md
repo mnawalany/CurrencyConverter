@@ -11,8 +11,8 @@ The simplest way to run application in an embeded Tomcat is to execute
     
 alternatively executable war may be created and run
 
-    gradle web-client:build
-    java -jar web-client/build/libs/CurrencyConverter.war    
+    ./gradlew stage
+    java -jar CurrencyConverter.war    
 
 you can access application on http://localhost:8080/
 

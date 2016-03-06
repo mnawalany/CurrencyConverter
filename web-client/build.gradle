@@ -32,3 +32,13 @@ jar {
 war {
     baseName = 'CurrencyConverter'
 }
+
+task stage(type: Copy, dependsOn: [clean, build]) {
+    from war.archivePath
+    into project.rootDir
+}
+stage.mustRunAfter(clean)
+
+clean << {
+    project.file('CurrencyConverter.war').delete()
+}
