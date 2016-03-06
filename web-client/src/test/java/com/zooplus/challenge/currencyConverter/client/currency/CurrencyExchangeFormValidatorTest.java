@@ -40,6 +40,45 @@ public class CurrencyExchangeFormValidatorTest {
     }
 
     @Test
+    public void shouldRejectWhenValueBelowZero() {
+        // Given
+        CurrencyExchangeForm currencyExchangeForm = validForm();
+        currencyExchangeForm.setValue("-1");
+
+        // When
+        validator.validate(currencyExchangeForm, errors);
+
+        // Then
+        verify(errors).rejectValue("value", "currencyExchange.fields.value.tooSmall", "Value cannot be smaller or equal to 0");
+    }
+
+    @Test
+    public void shouldRejectWhenValueZero() {
+        // Given
+        CurrencyExchangeForm currencyExchangeForm = validForm();
+        currencyExchangeForm.setValue("0");
+
+        // When
+        validator.validate(currencyExchangeForm, errors);
+
+        // Then
+        verify(errors).rejectValue("value", "currencyExchange.fields.value.tooSmall", "Value cannot be smaller or equal to 0");
+    }
+
+    @Test
+    public void shouldRejectWhenValueTooBig() {
+        // Given
+        CurrencyExchangeForm currencyExchangeForm = validForm();
+        currencyExchangeForm.setValue("1234567890");
+
+        // When
+        validator.validate(currencyExchangeForm, errors);
+
+        // Then
+        verify(errors).rejectValue("value", "currencyExchange.fields.value.tooBig", "Value cannot exeed 999999999");
+    }
+
+    @Test
     public void shouldRejectSameCurrencies() {
         // Given
         CurrencyExchangeForm currencyExchangeForm = validForm();
@@ -57,6 +96,19 @@ public class CurrencyExchangeFormValidatorTest {
     public void shouldAcceptValidForm() {
         // Given
         CurrencyExchangeForm currencyExchangeForm = validForm();
+
+        // When
+        validator.validate(currencyExchangeForm, errors);
+
+        // Then
+        verifyNoMoreInteractions(errors);
+    }
+
+    @Test
+    public void shouldAcceptValidFormWithMaximumValue() {
+        // Given
+        CurrencyExchangeForm currencyExchangeForm = validForm();
+        currencyExchangeForm.setValue("999999999");
 
         // When
         validator.validate(currencyExchangeForm, errors);

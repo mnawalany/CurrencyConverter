@@ -90,7 +90,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="query : ${recentCurrencyQueries}">
-                        <td th:text="${#temporals.format(query.date)}"></td>
+                        <td th:text="${#temporals.format(query.date, 'dd/MMM/yyyy HH:mm')}"></td>
                         <td th:text="${query.sourceValue}"></td>
                         <td th:text="${query.sourceCurrency.id}"></td>
                         <td th:text="${query.targetValue}"></td>
